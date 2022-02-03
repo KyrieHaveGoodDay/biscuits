@@ -1,0 +1,336 @@
+$color-sideBg: #444;
+$color-sideHover: #009ce1;
+$color-sideListBg: #fff602;
+$color-sideListRed: #d6000e;
+$color-sideListOrange: #eb6201;
+$color-sideListBlue: #3754d0;
+
+.sidenav--left {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 50;
+}
+//開關按鈕
+.sidenav__btn {
+  @extend %clear;
+  margin-bottom: 6px;
+  a {
+    @extend %link-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: $color-sideBg;
+    box-shadow: 2px 2px 5px rgba(#000, 0.3);
+    transition: 0.5s;
+    .sidenav--left & {
+      float: left;
+      &:hover {
+        background-color: $color-sideListBg;
+        &::before,
+        &::after {
+          background-color: #000;
+        }
+      }
+    }
+    //箭頭
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      left: 10px;
+      background-color: #fff;
+      transform-origin: center;
+      transition: 0.5s;
+    }
+    &::before {
+      top: 13px;
+      .sidenav--left & {
+        transform: rotate(-40deg);
+      }
+      .sidenav--left.sidenav--hide & {
+        transform: rotate(40deg);
+      }
+    }
+    &::after {
+      bottom: 13px;
+      .sidenav--left & {
+        transform: rotate(40deg);
+      }
+      .sidenav--left.sidenav--hide & {
+        transform: rotate(-40deg);
+      }
+    }
+  }
+}
+// 下方面板選單
+.sidenav__list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+  transition: 0.5s;
+  li {
+    color: #fff;
+    background-color: $color-sideBg;
+    box-shadow: 2px 2px 5px rgba(#000, 0.3);
+    transition: 0.5s;
+    &:not(:last-child) {
+      border-bottom: 1px solid #666;
+    }
+    &.sidenav__img {
+      @include media($pad) {
+        display: none;
+      }
+      a {
+        padding: 0;
+        width: 120px;
+        border: none;
+      }
+    }
+    &.sidenav__title {
+      text-align: center;
+      padding: 5px 15px;
+      color: $color-sideListBg;
+      border-color: $color-sideListBg;
+    }
+  }
+  &--bot {
+    padding: 3px;
+    border-bottom: none !important;
+    a {
+      padding: 2px 4px !important;
+      border-radius: 8px;
+    }
+  }
+  a {
+    @extend %link-block;
+    transition: 0.5s;
+    padding: 6px 15px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    .sidenav--left & {
+      border-left: 4px solid transparent;
+      &:hover {
+        border-color: none;
+        background-color: $color-sideListBg;
+        color: #000;
+      }
+    }
+    &.red {
+      background-color: $color-sideListRed;
+      color: #fff;
+      &:hover {
+        background-color: adjust-color($color-sideListRed, $lightness: -5%);
+        color: #fff;
+      }
+    }
+    &.white {
+      background-color: #fff;
+      color: #333;
+      &:hover {
+        background-color: adjust-color(#fff, $lightness: -5%);
+        color: #333;
+      }
+    }
+    &.orange {
+      background-color: $color-sideListOrange;
+      color: #fff;
+      &:hover {
+        background-color: adjust-color($color-sideListOrange, $lightness: -5%);
+        color: #fff;
+      }
+    }
+    &.blue {
+      background-color: $color-sideListBlue;
+      color: #fff600;
+      &:hover {
+        background-color: adjust-color($color-sideListBlue, $lightness: -5%);
+        color: #fff600;
+      }
+    }
+  }
+  .sidenav--left.sidenav--hide & {
+    transform: translateX(-200px);
+    pointer-events: none;
+    .sidenav_btn {
+      pointer-events: auto;
+    }
+  }
+}
+
+.sidenav__slider {
+  width: 120px;
+  a {
+    padding: 0;
+  }
+  @include media($pad) {
+    display: none !important;
+  }
+}
+
+// 手機版關閉按鈕
+.footer__baord--dismiss {
+  display: none;
+  text-align: center;
+  position: absolute;
+  right: 5px;
+  top: -40px;
+  width: 35px;
+  font-size: 24px;
+  line-height: 35px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 5px;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+// 手機版固定下方面板
+.footer__board {
+  display: none;
+  width: 100%;
+  position: fixed;
+  height: auto;
+  bottom: 0;
+  z-index: 99;
+  background: linear-gradient(
+    to right,
+    #8c0000 0%,
+    #8c0000 10%,
+    #c30000 30%,
+    #c30000 50%,
+    #c30000 50%,
+    #c30000 70%,
+    #8c0000 90%,
+    #8c0000 100%
+  );
+  a {
+    width: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    font-size: 24px;
+    line-height: 60px;
+    color: #fff;
+    &:hover {
+      text-decoration: none;
+    }
+    img {
+      margin-right: 5px;
+      width: auto;
+      height: 34px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 40px;
+    margin-top: 10px;
+    background-color: #fff;
+    width: 1px;
+  }
+}
+// RWD
+@include media($pad) {
+  .sidenav--left {
+    .sidenav__btn,
+    .sidenav__title {
+      display: none;
+    }
+  }
+  .footer__board {
+    display: block;
+  }
+  .sidenav--left {
+    top: inherit;
+    bottom: 60px;
+    width: 100%;
+    z-index: 35;
+    display: none;
+    &.tab-show {
+      display: block;
+    }
+    .sidenav__list {
+      padding: 4px;
+      background-color: rgba(0, 0, 0, 0.3);
+      &:after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      li {
+        width: 33.33%;
+        float: left;
+        padding: 4px;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        > a {
+          background-color: #fff602;
+          color: #000;
+          border-radius: 8px;
+          padding: 3px !important;
+          &.red {
+            background-color: $color-sideListRed;
+            color: #fff;
+            &:hover {
+              background-color: adjust-color(
+                $color-sideListRed,
+                $lightness: -5%
+              );
+              color: #fff;
+            }
+          }
+          &.white {
+            background-color: #fff;
+            color: #333;
+            &:hover {
+              background-color: adjust-color(#fff, $lightness: -5%);
+              color: #333;
+            }
+          }
+          &.orange {
+            background-color: $color-sideListOrange;
+            color: #fff;
+            &:hover {
+              background-color: adjust-color(
+                $color-sideListOrange,
+                $lightness: -5%
+              );
+              color: #fff;
+            }
+          }
+          &.blue {
+            background-color: $color-sideListBlue;
+            color: #fff600;
+            &:hover {
+              background-color: adjust-color(
+                $color-sideListBlue,
+                $lightness: -5%
+              );
+              color: #fff600;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tab-show .footer__baord--dismiss {
+    display: block;
+  }
+}

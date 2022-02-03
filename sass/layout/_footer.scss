@@ -1,0 +1,62 @@
+$color-footerBg: #333333;
+$color-footerBgDark: #000;
+
+.footer {
+  text-align: center;
+  // background-color: $color-footerBg;
+}
+// 銀行標語
+.bank-slogan {
+  padding: 15px 10px;
+  color: #5a2414;
+  background-color: $color-footerBg;
+  &__title {
+    display: inline-block;
+    font-size: 1.25rem;
+    font-weight: 300;
+    padding: 5px 20px;
+    border: 1px solid #5a2414;
+  }
+  &__text {
+    margin-bottom: 0;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+}
+
+// pchome標語
+.pchome-slogan {
+  padding: 15px 10px 15px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #5a2414;
+  // background-color: $color-footerBgDark;
+}
+
+.footer__icon-list {
+  @include flexJcenter(center);
+  padding: 0;
+  margin-bottom: 15px;
+  li {
+    display: inline-block;
+    padding: 0 3px;
+    margin-bottom: 5px;
+  }
+  img {
+    width: 40px;
+  }
+}
+
+.pchome-slogan__text {
+  font-size: 14px;
+  @include media($mobile) {
+    font-size: 12px;
+    span {
+      display: block;
+    }
+    br {
+      display: none;
+    }
+  }
+}

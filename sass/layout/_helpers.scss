@@ -1,0 +1,109 @@
+.main {
+  background-color: #ccc;
+  height: 1000px;
+}
+$menuWidth: 400px;
+$menuCount: 4;
+$buttonWidth: $menuWidth / $menuCount;
+div {
+  width: calc(#{$menuWidth} / #{$menuCount});
+}
+$font: 12px 16px 24px 30px 46px 48px;
+html {
+  font-size: nth($font, 2); // 二級字
+}
+%color-main {
+  color: red;
+}
+div {
+  @extend %color-main;
+  color: blue;
+}
+$color: (
+  main1: red,
+  main2: blue,
+  main3: yellow
+);
+div {
+  color: map-get($color, main2);
+}
+$font: 12px 16px 24px 30px;
+
+@mixin font($index: 1) {
+  font-size: nth($font, $index);
+  line-height: line-height($index);
+}
+
+@function line-height($index: 1) {
+  $font-size: nth($font, $index);
+  @return (floor($font-size / 10px) + 1) * 10px;
+}
+
+.myFont {
+  @include font(4);
+}
+
+///////////////////////////////
+// 根據字體大小，自動計算行高---------------------Start
+$baseLine: 10px;
+$lineRatio: 1.2; //行高比例
+
+@function rhythm($level) {
+  // ceil($value)：向上取整；
+  @return $baseLine * ceil($level);
+}
+
+@function line($size) {
+  @return rhythm($size * $lineRatio / $baseLine);
+}
+
+@mixin font($size, $line-height: auto) {
+  $line: line($size);
+
+  font-size: $size;
+  @if $line-height == auto or $line-height < $line {
+    line-height: $line;
+  } @else {
+    line-height: $line-height;
+  }
+}
+$light: white;
+$dark: black;
+
+// gray1~3
+
+// @for $i from 1 to 4 { <
+// @for $i from 1 through 4 {
+//   // <=
+//   .gray#{5 - $i} {
+//     color: adjust-color($dark, $lightness: 10% * $i);
+//   }
+// }
+
+@for $i from 1 through 9 {
+  // <=
+  $level: 30%;
+  @if ($level * $i) < 100% and ($level * $i) > -100% {
+    .gray#{10 - $i} {
+      color: adjust-color($dark, $lightness: $level * $i);
+    }
+  }
+}
+// 使用方式
+// @include font(18px);
+// @include font(20px, 60px);
+
+// 根據字體大小，自動計算行高---------------------End
+div {
+  @include media($padLg) {
+    width: 1000px;
+  }
+}
+div {
+  @include media($pad) {
+    font-size: 12px;
+  }
+  @include media($pad) {
+    font-size: 14px;
+  }
+}

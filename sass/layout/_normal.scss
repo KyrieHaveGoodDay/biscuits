@@ -1,0 +1,42 @@
+// @import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css');
+// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+
+body,
+div,
+span,
+h1,
+p,
+a,
+img,
+dl,
+dt,
+dd {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: none !important;
+  background: transparent;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding-right: 0 !important; //modal 開啟抖動bug
+  // -webkit-overflow-scrolling: touch; // ios滑動效果
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+.modal-open {
+  overflow: initial !important; //modal 開啟抖動bug
+}
+a:focus,
+button:active,
+button:focus,
+area:active,
+area:focus {
+  box-shadow: none;
+  outline: 0;
+}
+img {
+  max-width: 100%;
+}

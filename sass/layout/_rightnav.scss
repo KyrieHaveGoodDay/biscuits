@@ -1,0 +1,166 @@
+$color-sideBg: #444;
+$color-sideHover: #009ce1;
+
+.sidenav--right {
+  position: fixed;
+  top: 100px;
+  right: 0;
+  z-index: 50;
+}
+//開關按鈕
+.sidenav__btn {
+  @extend %clear;
+  margin-bottom: 6px;
+  a {
+    @extend %link-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-color: $color-sideBg;
+    box-shadow: 2px 2px 5px rgba(#000, 0.3);
+    transition: 0.5s;
+    .sidenav--right & {
+      float: right;
+    }
+    &:hover {
+      background-color: $color-sideHover;
+    }
+    //箭頭
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      left: 10px;
+      background-color: #fff;
+      transform-origin: center;
+      transition: 0.5s;
+    }
+    &::before {
+      top: 13px;
+      .sidenav--right & {
+        transform: rotate(40deg);
+      }
+      .sidenav--right.sidenav--hide & {
+        transform: rotate(-40deg);
+      }
+    }
+    &::after {
+      bottom: 13px;
+      .sidenav--right & {
+        transform: rotate(-40deg);
+      }
+      .sidenav--right.sidenav--hide & {
+        transform: rotate(40deg);
+      }
+    }
+  }
+}
+// 下方面板選單
+.sidenav__list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+  transition: 0.5s;
+  li {
+    color: #fff;
+    background-color: $color-sideBg;
+    box-shadow: 2px 2px 5px rgba(#000, 0.3);
+    transition: 0.5s;
+    li:not(:last-child) {
+      border-bottom: 1px solid #666;
+    }
+    &.sidenav__img a {
+      padding: 0;
+      width: 120px;
+    }
+  }
+  a {
+    @extend %link-block;
+    transition: 0.5s;
+    padding: 10px 15px;
+    text-align: center;
+    color: #fff;
+    .sidenav--right & {
+      border-right: 4px solid transparent;
+      &:hover {
+        border-color: $color-sideHover;
+        background-color: adjust-color($color-sideBg, $lightness: 10%);
+      }
+    }
+  }
+  .sidenav--hide & {
+    transform: translateX(200px);
+    pointer-events: none;
+    height: 0;
+    .sidenav_btn {
+      pointer-events: auto;
+    }
+  }
+}
+
+.sidenav__slider {
+  width: 120px;
+  a {
+    padding: 0;
+  }
+  @include media($pad) {
+    display: none !important;
+  }
+}
+
+// RWD
+@include media($pad) {
+  .sidenav--right {
+    position: relative;
+    top: 0;
+    left: 0;
+    text-align: center;
+    color: #888;
+    background-color: #fff;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    .sidenav__btn {
+      display: none;
+    }
+    .sidenav__list {
+      font-size: 0;
+      white-space: nowrap;
+      color: #777;
+      background: inherit;
+      box-shadow: none;
+      li {
+        display: inline-block;
+        font-size: 16px;
+        padding: 4px 0 6px;
+        line-height: 1;
+        background-color: transparent;
+        box-shadow: none;
+        border-bottom: none !important;
+        &:not(:first-child) a {
+          border-left: 1px solid #888;
+        }
+        &.sidenav__img {
+          display: none;
+        }
+      }
+      a {
+        padding: 0 15px;
+        color: #888;
+        border: none;
+        &:hover,
+        &:active {
+          background-color: transparent;
+        }
+      }
+    }
+    &.fixed {
+      position: fixed;
+      top: 0;
+      box-shadow: 0 0 15px rgba(#000, 0.5);
+      z-index: 50;
+    }
+  }
+}
